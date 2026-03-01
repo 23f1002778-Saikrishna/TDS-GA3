@@ -1,0 +1,28 @@
+name: Playwright Scraper - Sum All Numbers
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 6 * * *'
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 23f1002778@ds.study.iitm.ac.in - Install Playwright and dependencies
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install chromium --with-deps
+
+      - name: Run Playwright scraper and sum all numbers
+        run: node Q13/scrape.js
